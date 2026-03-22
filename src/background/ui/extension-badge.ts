@@ -11,7 +11,7 @@ export function updateBadge(timer: TimerState) {
 }
 
 function updateBadgeColor(type: TimerType) {
-  const color = type === 'focus' ? '#ff0000' : '#00ff00';
+  const color = type === 'focus' ? '#bb0000' : '#11aa11';
   chrome.action.setBadgeBackgroundColor({ color });
 }
 
