@@ -24,40 +24,19 @@ export class HistoryUtils {
    * Gets the start timestamps for today, this week, and this month
    */
   static getTimePeriodBoundaries(now: Date) {
-    const timezoneOffset = now.getTimezoneOffset();
-    
     const startOfDay = new Date(now);
     startOfDay.setHours(0, 0, 0, 0);
-    
+
     const startOfWeek = new Date(startOfDay);
     startOfWeek.setDate(startOfDay.getDate() - startOfDay.getDay());
-    
+
     const startOfMonth = new Date(startOfDay.getFullYear(), startOfDay.getMonth(), 1);
-    
+
     return {
-      dayStart: this.dateToTimestamp(startOfDay) + timezoneOffset,
-      weekStart: this.dateToTimestamp(startOfWeek) + timezoneOffset,
-      monthStart: this.dateToTimestamp(startOfMonth) + timezoneOffset
+      dayStart: this.dateToTimestamp(startOfDay),
+      weekStart: this.dateToTimestamp(startOfWeek),
+      monthStart: this.dateToTimestamp(startOfMonth)
     };
-  }
-
-  /**
-   * Find the timezone offset for a given timestamp from history
-   */
-  static findTimezoneOffsetForTimestamp(history: PomodoroHistory, targetTimestamp: number): number {
-    if (history.timezones.length === 0) {
-      return new Date().getTimezoneOffset();
-    }
-
-    let totalCount = 0;
-    for (let i = 0; i < history.timezones.length; i++) {
-      totalCount += history.timezones[i].count;
-      if (totalCount >= history.completion_timestamps.findIndex(t => t === targetTimestamp) + 1) {
-        return history.timezones[i].value;
-      }
-    }
-
-    return history.timezones[history.timezones.length - 1].value;
   }
 
   /**

@@ -68,7 +68,7 @@ const Heatmap: React.FC<DistributionProps> = ({ pomodoroHistory }) => {
     const data: { [key: string]: number } = {};
     Object.entries(dailyGroups).forEach(([timestamp, count]) => {
       const date = new Date(parseInt(timestamp));
-      const dateKey = date.toISOString().split('T')[0];
+      const dateKey = getDateKey(date);
       data[dateKey] = count;
     });
 

@@ -62,25 +62,22 @@ const createEmptyStats = (): PomodoroStats => ({
 const updatePeriodCounters = (
   timestamp: number,
   boundaries: { dayStart: number; weekStart: number; monthStart: number },
-  counters: { daily: number; weekly: number; monthly: number },
-  history: PomodoroHistory
+  counters: { daily: number; weekly: number; monthly: number }
 ) => {
-  const timezoneOffset = HistoryUtils.findTimezoneOffsetForTimestamp(history, timestamp);
-  const adjustedTimestamp = timestamp + timezoneOffset;
   const timestampDate = new Date(timestamp * 60000);
   const timestampMonth = timestampDate.getMonth();
   const currentMonth = new Date().getMonth();
 
-  if (adjustedTimestamp >= boundaries.dayStart) {
+  if (timestamp >= boundaries.dayStart) {
     counters.daily++;
     counters.weekly++;
     counters.monthly++;
-  } else if (adjustedTimestamp >= boundaries.weekStart) {
+  } else if (timestamp >= boundaries.weekStart) {
     counters.weekly++;
     counters.monthly++;
   } else if (timestampMonth === currentMonth) {
     counters.monthly++;
-  } else if (adjustedTimestamp < boundaries.monthStart) {
+  } else if (timestamp < boundaries.monthStart) {
     return false;
   }
   return true;
@@ -142,7 +139,7 @@ export async function getHistoricalStats(): Promise<PomodoroStats> {
       }
 
       const timestamp = uniqueHistory.completion_timestamps[i];
-      const shouldContinue = updatePeriodCounters(timestamp, periodBoundaries, stats, uniqueHistory);
+      const shouldContinue = updatePeriodCounters(timestamp, periodBoundaries, stats);
       if (!shouldContinue) break;
 
       sessionsRemainingForDuration--;
@@ -383,6 +380,8 @@ export function createCsvData(history: PomodoroHistory): CsvRow[] {
   let durationIndex = 0;
   let sessionsRemainingForDuration = 0;
   let currentDuration = 0;
+  const timestampToOffset = HistoryUtils.createTimestampOffsetMap(history);
+  const defaultOffset = new Date().getTimezoneOffset();
 
   history.completion_timestamps.forEach(timestamp => {
     if (sessionsRemainingForDuration === 0) {
@@ -393,13 +392,12 @@ export function createCsvData(history: PomodoroHistory): CsvRow[] {
       }
     }
 
-    const timezoneOffset = HistoryUtils.findTimezoneOffsetForTimestamp(history, timestamp);
-
+    const timezoneOffset = timestampToOffset.get(timestamp) ?? defaultOffset;
     const date = new Date(timestamp * 60000);
-    const isoDate = date.toISOString().replace('Z', HistoryUtils.formatTimezoneOffset(timezoneOffset));
-    const dateStr = date.toISOString().split('T')[0];
+    const dateStr = date.toLocaleDateString('en-CA');
     const timeStr = date.toTimeString().split(' ')[0];
-    
+    const isoDate = `${dateStr}T${timeStr}${HistoryUtils.formatTimezoneOffset(timezoneOffset)}`;
+
     rows.push({
       isoDate,
       dateStr,
@@ -425,9 +423,6 @@ export function getDailyGroups(history: PomodoroHistory, since: Date): Record<nu
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   
-  const timestampToOffset = HistoryUtils.createTimestampOffsetMap(history);
-  const defaultOffset = new Date().getTimezoneOffset();
-
   const sortedTimestamps = [...history.completion_timestamps].sort((a, b) => b - a);
   let currentDate = new Date(today);
 
@@ -442,8 +437,7 @@ export function getDailyGroups(history: PomodoroHistory, since: Date): Record<nu
 
     let dayCount = 0;
     for (const timestamp of sortedTimestamps) {
-      // Don't adjust timestamps - they're already in UTC
-      // Instead, compare directly against UTC day boundaries
+      // Compare UTC timestamps against local day boundaries (converted to UTC minutes)
       if (timestamp >= startTimestamp && timestamp < endTimestamp) {
         dayCount++;
       }
