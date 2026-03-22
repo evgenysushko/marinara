@@ -54,29 +54,13 @@ export class PomodoroTimer {
   }
 
   private async initialize(): Promise<void> {
-    const today = new Date().toISOString().split('T')[0];
     try {
       const storedState = await this.stateStorage.loadState();
-      
+
       if (storedState) {
-        // Check if we need to reset daily sessions (new day)
-        const shouldResetDaily = storedState.lastSessionDate !== today;
-        
-        if (shouldResetDaily) {
-          await this.updateState({
-            ...storedState,
-            sessionsSinceLastLongBreak: 0,
-            lastSessionDate: today
-          });
-        } else {
-          await this.updateState(storedState);
-        }
+        await this.updateState(storedState);
       } else {
-        // No stored state, create a fresh one
-        await this.updateState({
-          ...this.createDefaultState(),
-          lastSessionDate: today
-        });
+        await this.updateState(this.createDefaultState());
       }
 
       // Start interval if timer was running
@@ -85,10 +69,7 @@ export class PomodoroTimer {
       }
     } catch (error) {
       console.error('Error initializing timer:', error);
-      await this.updateState({
-        ...this.createDefaultState(),
-        lastSessionDate: today
-      });
+      await this.updateState(this.createDefaultState());
     }
     this.initialized = true;
   }
