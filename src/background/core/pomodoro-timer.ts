@@ -25,6 +25,8 @@ export class PomodoroTimer {
   private badgeManager: BadgeManager;
   private stateStorage: TimerStateStorage;
   private contextMenuManager: ContextMenuManager;
+  private initialized = false;
+  private initializationPromise: Promise<void> | null = null;
 
   constructor() {
     this.currentTimer = this.createDefaultState();
@@ -32,7 +34,7 @@ export class PomodoroTimer {
     this.badgeManager = new BadgeManager();
     this.stateStorage = new TimerStateStorage();
     this.contextMenuManager = new ContextMenuManager();
-    this.initialize();
+    this.initializationPromise = this.initialize();
     this.setupSettingsListener();
   }
 
@@ -88,6 +90,14 @@ export class PomodoroTimer {
         lastSessionDate: today
       });
     }
+    this.initialized = true;
+  }
+
+  public async waitForInitialization(): Promise<void> {
+    if (this.initialized) return;
+    if (this.initializationPromise) {
+      await this.initializationPromise;
+    }
   }
 
   private async updateState(timerStateUpdates: Partial<TimerStateType>): Promise<void> {
@@ -129,6 +139,7 @@ export class PomodoroTimer {
   }
 
   public async toggleTimerState(): Promise<void> {
+    await this.waitForInitialization();
     await debugLogger.log('PomodoroTimer', 'toggleTimerState', 'called', {
       currentState: {
         timerStatus: this.currentTimer.timerStatus,
@@ -191,7 +202,7 @@ export class PomodoroTimer {
   }
 
   public async start(timerType: TimerType): Promise<void> {
-    // Wait for settings to be initialized
+    await this.waitForInitialization();
     await settingsManager.waitForInitialization();
 
     const durationMinutes = settingsManager.getTimerDurationInMinutes(timerType);
@@ -228,6 +239,7 @@ export class PomodoroTimer {
   }
 
   public async stop(reason: 'manual' | 'natural' = 'manual'): Promise<void> {
+    await this.waitForInitialization();
     try {
       await debugLogger.log('PomodoroTimer', 'stop', `${reason.toUpperCase()} STOP called`, {
         currentState: this.currentTimer.timerStatus,
@@ -252,6 +264,7 @@ export class PomodoroTimer {
   }
 
   public async pause(): Promise<void> {
+    await this.waitForInitialization();
     try {
       if (!this.isRunning()) return;
       
@@ -273,6 +286,7 @@ export class PomodoroTimer {
   }
 
   public async resume(): Promise<void> {
+    await this.waitForInitialization();
     try {
       if (this.isRunning() || !this.currentTimer.remainingTime || !this.currentTimer.timerType) {
         throw new TimerError('Cannot resume timer: Invalid timer state');
@@ -309,7 +323,8 @@ export class PomodoroTimer {
   }
 
   public async resetCycle(): Promise<void> {
-    await this.updateState({ 
+    await this.waitForInitialization();
+    await this.updateState({
       sessionsSinceLastLongBreak: 0,
       lastCompletedPhaseType: null 
     });
