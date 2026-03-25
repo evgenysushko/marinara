@@ -286,7 +286,7 @@ class CountdownObserver {
       properties = { width: windowWidth, height: windowHeight, left, top };
     }
 
-    page = await SingletonPage.show(url, PageHost, properties);
+    page = await SingletonPage.show(url, PageHost.Window, properties);
     await page.focus();
   }
 }
