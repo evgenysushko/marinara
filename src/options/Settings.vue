@@ -199,7 +199,6 @@ input[type="number"] {
   transform: translateY(300%);
 }
 .section.autostart {
-  display: none;
 }
 .save {
   position: fixed;

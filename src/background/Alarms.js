@@ -1,4 +1,5 @@
 import Chrome from '../Chrome';
+import M from '../Messages';
 import Mutex from '../Mutex';
 
 let settings = null;
