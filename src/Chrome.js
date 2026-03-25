@@ -217,6 +217,12 @@ class Alarms
     return chrome.alarms.create(name, alarmInfo);
   }
 
+  static async clear(name) {
+    return promise(callback => {
+      chrome.alarms.clear(name, callback)
+    });
+  }
+
   static async clearAll() {
     return promise(callback => {
       chrome.alarms.clearAll(callback)

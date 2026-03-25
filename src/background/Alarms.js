@@ -17,7 +17,7 @@ async function install(timer, settingsManager) {
 
 async function setAlarm(settings) {
   await mutex.exclusive(async () => {
-    await Chrome.alarms.clearAll();
+    await Chrome.alarms.clear('autostart');
 
     let time = settings.autostart && settings.autostart.time;
     if (!time) {
