@@ -5,7 +5,7 @@ import * as Sounds from '../Sounds';
 import Notification from './Notification';
 import { ExpirationPage } from './Expiration';
 import Mutex from '../Mutex';
-import createTimerSound from '../TimerSound';
+import { ensureOffscreen } from '../Offscreen';
 import { SingletonPage, PageHost } from './SingletonPage';
 
 class BadgeObserver
@@ -60,52 +60,59 @@ class BadgeObserver
   }
 }
 
+function sendTimerSound(action, timerSound) {
+  return ensureOffscreen().then(() => {
+    return new Promise(resolve => {
+      chrome.runtime.sendMessage({ type: 'timer-sound', action, timerSound }, () => {
+        resolve();
+      });
+    });
+  }).catch(e => {
+    console.error('Timer sound error:', e);
+  });
+}
+
 class TimerSoundObserver
 {
   constructor(settings) {
     this.settings = settings;
-    this.mutex = new Mutex();
-    this.timerSound = null;
+    this.active = false;
   }
 
   async onStart({ phase }) {
     let timerSoundSettings = this.settings.focus.timerSound;
-    await this.mutex.exclusive(async () => {
-      // Cleanup any existing timer sound.
-      this.timerSound && await this.timerSound.close();
-
-      if (phase === Phase.Focus && timerSoundSettings) {
-        console.log("Starting timer sound");
-        this.timerSound = await createTimerSound(timerSoundSettings);
-        this.timerSound.start();
-      } else {
-        this.timerSound = null;
-      }
-    });
+    if (phase === Phase.Focus && timerSoundSettings) {
+      this.active = true;
+      await sendTimerSound('start', timerSoundSettings);
+    } else {
+      this.active = false;
+    }
   }
 
   async onStop() {
-    await this.mutex.exclusive(async () => {
-      this.timerSound && await this.timerSound.close();
-    });
+    if (this.active) {
+      this.active = false;
+      await sendTimerSound('close');
+    }
   }
 
   async onPause() {
-    await this.mutex.exclusive(async () => {
-      this.timerSound && await this.timerSound.stop();
-    });
+    if (this.active) {
+      await sendTimerSound('stop');
+    }
   }
 
   async onResume() {
-    await this.mutex.exclusive(async () => {
-      this.timerSound && await this.timerSound.start();
-    });
+    if (this.active) {
+      await sendTimerSound('resume');
+    }
   }
 
   async onExpire() {
-    await this.mutex.exclusive(async () => {
-      this.timerSound && await this.timerSound.close();
-    });
+    if (this.active) {
+      this.active = false;
+      await sendTimerSound('close');
+    }
   }
 }
 

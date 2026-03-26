@@ -1,5 +1,6 @@
 import Chrome from './Chrome';
 import M from './Messages';
+import { ensureOffscreen } from './Offscreen';
 
 function createNotificationSounds() {
   let sounds = [
@@ -95,19 +96,11 @@ async function play(filename) {
     return;
   }
 
-  const offscreenUrl = 'modules/offscreen.html';
-  const hasDocument = chrome.offscreen.hasDocument ? await chrome.offscreen.hasDocument() : false;
-  if (!hasDocument) {
-    try {
-      await chrome.offscreen.createDocument({
-        url: offscreenUrl,
-        reasons: ['AUDIO_PLAYBACK'],
-        justification: 'Play extension notification sounds.'
-      });
-    } catch (e) {
-      console.error('Failed to create offscreen document', e);
-      return;
-    }
+  try {
+    await ensureOffscreen();
+  } catch (e) {
+    console.error('Failed to create offscreen document', e);
+    return;
   }
 
   await new Promise((resolve, reject) => {
