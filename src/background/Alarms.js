@@ -56,7 +56,7 @@ async function onAlarm(alarm, timer) {
     type: 'basic',
     title: M.autostart_notification_title,
     message: M.autostart_notification_message,
-    iconUrl: 'images/128.png',
+    iconUrl: '/images/128.png',
     isClickable: false,
     requireInteraction: true
   });
