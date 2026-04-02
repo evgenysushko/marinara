@@ -2,6 +2,8 @@
 
 Marinara is a [time management assistant for Chrome](https://chrome.google.com/webstore/detail/marinara/lojgmehidjdhhbmpjfamhpkpodfcodef) that follows the [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_Technique).
 
+Built on [schmich/marinara](https://github.com/schmich/marinara). MV3 port by [nigow](https://github.com/nigow/marinara).
+
 Pomodoro® and The Pomodoro Technique® are trademarks of Francesco Cirillo. Marinara is not affiliated or associated with or endorsed by Pomodoro®, The Pomodoro Technique® or Francesco Cirillo.
 
 ## Features
