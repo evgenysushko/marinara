@@ -11,7 +11,6 @@ class StorageManager extends EventEmitter
   async get() {
     let [payload, modified] = this._upgrade(await this.storage.get());
     if (modified) {
-      await this.storage.clear();
       await this.storage.set(payload);
     }
 
@@ -27,7 +26,13 @@ class StorageManager extends EventEmitter
   _upgrade(payload) {
     let modified = false;
 
-    if (Object.keys(payload).length === 0) {
+    // Check if payload contains any keys owned by this schema.
+    // Other modules may share the same storage area (e.g., TimerPersistence
+    // shares chrome.storage.local with History), so foreign keys are ignored.
+    let schemaKeys = Object.keys(this.schema.default);
+    let hasOwnData = schemaKeys.some(k => k in payload);
+
+    if (!hasOwnData) {
       modified = true;
       payload = this.schema.default;
     }
