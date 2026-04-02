@@ -5,13 +5,12 @@ import Mutex from '../Mutex';
 let settings = null;
 let mutex = new Mutex();
 
-async function install(timer, settingsManager) {
+async function install(settingsManager) {
   settings = await settingsManager.get();
   settingsManager.on('change', async newSettings => {
     settings = newSettings;
     await setAlarm(settings);
   });
-  chrome.alarms.onAlarm.addListener(alarm => onAlarm(alarm, timer));
   await setAlarm(settings);
 }
 
@@ -63,5 +62,6 @@ async function onAlarm(alarm, timer) {
 }
 
 export {
-  install
+  install,
+  onAlarm
 };

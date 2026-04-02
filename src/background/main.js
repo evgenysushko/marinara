@@ -10,14 +10,29 @@ import { ServiceBroker } from '../Service';
 import * as Alarms from './Alarms';
 import { PersistenceObserver, loadState, restoreTimer, ALARM_NAME } from './TimerPersistence';
 
-async function run() {
-  chrome.runtime.onUpdateAvailable.addListener(() => {
-    // We must listen to (but do nothing with) the onUpdateAvailable event in order to
-    // defer updating the extension until the next time Chrome is restarted. We do not want
-    // the extension to automatically reload on update since a Pomodoro might be running.
-    // See https://developer.chrome.com/apps/runtime#event-onUpdateAvailable.
-  });
+// MV3: Register event listeners synchronously before any async work.
+// Chrome only delivers events to listeners registered in the first turn of the event loop.
+// Handlers are wired up during async setup; events arriving before that are queued.
+chrome.runtime.onUpdateAvailable.addListener(() => {
+  // Defer updating the extension until Chrome restarts, so a running Pomodoro isn't interrupted.
+});
 
+let alarmHandler = null;
+const earlyAlarms = [];
+chrome.alarms.onAlarm.addListener(alarm => {
+  if (alarmHandler) {
+    alarmHandler(alarm);
+  } else {
+    earlyAlarms.push(alarm);
+  }
+});
+
+let clickHandler = null;
+chrome.action.onClicked.addListener(() => {
+  if (clickHandler) clickHandler();
+});
+
+async function run() {
   let settingsManager = new StorageManager(new SettingsSchema(), Chrome.storage.sync);
   let settings = await PersistentSettings.create(settingsManager);
   let timer = new PomodoroTimer(settings);
@@ -48,33 +63,36 @@ async function run() {
   menu.apply();
   settingsManager.on('change', () => menu.apply());
 
-  Alarms.install(timer, settingsManager);
-  chrome.action.onClicked.addListener(() => {
-    if (timer.isRunning) {
-      timer.pause();
-    } else if (timer.isPaused) {
-      timer.resume();
-    } else {
-      timer.start();
+  // Must await — Alarms.onAlarm() references module-level `settings` variable
+  // that is set inside install() via `settings = await settingsManager.get()`.
+  await Alarms.install(settingsManager);
+
+  // Wire up alarm handler (consolidates autostart + timer-expire).
+  alarmHandler = (alarm) => {
+    Alarms.onAlarm(alarm, timer);
+    if (alarm.name === ALARM_NAME && timer.isRunning && timer.remaining <= 0) {
+      timer.timer.setExpireTimeout(0);
     }
-  });
+  };
+
+  // Replay any alarms that fired during async setup.
+  for (const alarm of earlyAlarms) {
+    alarmHandler(alarm);
+  }
+  earlyAlarms.length = 0;
+
+  // Wire up click handler.
+  clickHandler = () => {
+    if (timer.isRunning) timer.pause();
+    else if (timer.isPaused) timer.resume();
+    else timer.start();
+  };
 
   ServiceBroker.register(new HistoryService(history));
   ServiceBroker.register(new SoundsService());
   ServiceBroker.register(new SettingsService(settingsManager));
   ServiceBroker.register(new PomodoroService(timer));
   ServiceBroker.register(new OptionsService());
-
-  // Listen for timer expiration alarm (safety net).
-  chrome.alarms.onAlarm.addListener(alarm => {
-    if (alarm.name !== ALARM_NAME) {
-      return;
-    }
-    // If timer already expired or was stopped, this is a no-op.
-    if (timer.isRunning && timer.remaining <= 0) {
-      timer.timer.setExpireTimeout(0);
-    }
-  });
 
   // Emit synthetic events for restored state so all observers update.
   if (restoreResult === 'running') {
