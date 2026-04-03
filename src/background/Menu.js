@@ -2,6 +2,7 @@ import M from '../Messages';
 import { SingletonPage, PageHost } from './SingletonPage';
 
 const menuHandlers = new Map();
+let menuGeneration = 0;
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   let handler = menuHandlers.get(info.menuItemId);
@@ -31,7 +32,9 @@ class Menu
   }
 
   apply() {
+    let gen = ++menuGeneration;
     chrome.contextMenus.removeAll(() => {
+      if (gen !== menuGeneration) return;
       menuHandlers.clear();
 
       let idCounter = 0;
