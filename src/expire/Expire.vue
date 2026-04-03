@@ -173,8 +173,14 @@ export default {
     }
   },
   methods: {
-    startSession() {
-      PomodoroClient.once.start();
+    async startSession() {
+      try {
+        await PomodoroClient.once.start();
+      } catch {
+        // SW may be cold-starting. Retry once after it has time to initialize.
+        await new Promise(r => setTimeout(r, 500));
+        await PomodoroClient.once.start().catch(() => {});
+      }
     },
     showHistoryPage() {
       OptionsClient.once.showHistoryPage();
