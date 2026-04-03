@@ -39,7 +39,7 @@ class ServiceBroker
         // Service is defined in this context, call method directly.
         return await service[methodName](...args);
       } else {
-        throw new Exception(`Invalid service request: ${serviceName}.${methodName}.`);
+        throw new Error(`Invalid service request: ${serviceName}.${methodName}.`);
       }
     }
 
