@@ -13,8 +13,6 @@
     "contextMenus",
     "storage",
     "notifications",
-    "tabs",
-    "windows",
     "offscreen"
   ],
   "action": {

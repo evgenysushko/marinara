@@ -6,49 +6,44 @@ const PageHost = new Enum({
   Window: 1
 });
 
-function canonical(url) {
-  // The canonical page URL is the combined origin, path, and sorted query,
-  // lowercased, excluding hashes and trailing slashes.
-  // This will only reliably work with internal extension pages.
-  url.searchParams.sort();
-  return `${url.origin}${url.pathname.replace(/\/$/, '')}${url.searchParams}`.toLowerCase();
+function storageKey(url) {
+  let pathname = new URL(url).pathname.replace(/\/$/, '').toLowerCase();
+  return `singleton:${pathname}`;
 }
 
 class SingletonPage
 {
   static async show(url, host, properties = {}) {
-    // Search existing extension pages to see if page is already open.
-    let targetUrl = new URL(url);
-    let targetCanonical = canonical(targetUrl);
+    let key = storageKey(url);
 
-    let tabs = await Chrome.tabs.query({});
-    for (let tab of tabs) {
-      if (!tab.url) {
-        continue;
+    let result = await chrome.storage.session.get(key);
+    let existingTabId = result[key];
+    if (existingTabId != null) {
+      try {
+        await Chrome.tabs.update(existingTabId, { url });
+        return new SingletonPage(existingTabId, key);
+      } catch {
+        await chrome.storage.session.remove(key);
       }
-
-      if (canonical(new URL(tab.url)) !== targetCanonical) {
-        continue;
-      }
-
-      // We found a matching page. Update its hash and return it.
-      await Chrome.tabs.update(tab.id, { url: targetUrl.href });
-      return new SingletonPage(tab.id);
     }
 
     // Page does not exist, so create it.
+    let tabId;
     if (host === PageHost.Tab) {
       let tab = await Chrome.tabs.create({ url, active: false, ...properties });
-      return new SingletonPage(tab.id);
+      tabId = tab.id;
     } else if (host === PageHost.Window) {
       let window = await Chrome.windows.create({ url, type: 'popup', ...properties });
-      return new SingletonPage(window.tabs[0].id);
+      tabId = window.tabs[0].id;
     } else {
       throw new Error('Invalid page host.');
     }
+
+    await chrome.storage.session.set({ [key]: tabId });
+    return new SingletonPage(tabId, key);
   }
 
-  constructor(tabId) {
+  constructor(tabId, sKey) {
     this.tabId = tabId;
 
     const self = this;
@@ -56,6 +51,9 @@ class SingletonPage
       if (id === self.tabId) {
         chrome.tabs.onRemoved.removeListener(removed);
         self.tabId = null;
+        if (sKey) {
+          chrome.storage.session.remove(sKey);
+        }
       }
     });
   }
