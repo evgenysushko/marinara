@@ -155,6 +155,9 @@ export default {
     document.title = `${M.expire_title} - ${M.app_name_short}`;
     document.body.addEventListener('keypress', this.onKeyPress);
 
+    this.pomodoroClient = new PomodoroClient();
+    this.pomodoroClient.on('start', () => window.close());
+
     let { title, action, pomodoros, messages, phase } = await ExpirationClient.once.getProperties();
     this.show = true;
     this.title = title;
@@ -165,6 +168,9 @@ export default {
   },
   beforeDestroy() {
     document.body.removeEventListener('keypress', this.onKeyPress);
+    if (this.pomodoroClient) {
+      this.pomodoroClient.dispose();
+    }
   },
   methods: {
     startSession() {
