@@ -164,7 +164,7 @@ class Service
       args
     }, () => {
       let lastError = chrome.runtime.lastError;
-      if (lastError && lastError.message && !/Receiving end does not exist/.test(lastError.message)) {
+      if (lastError && lastError.message && !/Receiving end does not exist|message port closed/i.test(lastError.message)) {
         console.error(lastError);
       }
     });

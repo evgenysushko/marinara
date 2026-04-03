@@ -320,10 +320,6 @@ class MenuObserver
     this.menu.apply();
   }
 
-  onTick() {
-    this.menu.apply();
-  }
-
   onExpire() {
     this.menu.apply();
   }

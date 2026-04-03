@@ -186,7 +186,7 @@ class PomodoroTimer extends EventEmitter
       this.timer.removeAllListeners();
     }
 
-    this.timer = new this.timerType(Math.floor(duration * 60), 60);
+    this.timer = new this.timerType(Math.floor(duration * 60), 1);
     this.timer.observe(this);
   }
 

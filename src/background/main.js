@@ -97,6 +97,7 @@ async function run() {
   // Emit synthetic events for restored state so all observers update.
   if (restoreResult === 'running') {
     timer.emit('tick', timer.status);
+    menu.apply();
   } else if (restoreResult === 'paused') {
     timer.emit('pause', timer.status);
   } else if (restoreResult === 'expired') {
