@@ -6,7 +6,6 @@ import Notification from './Notification';
 import { ExpirationPage } from './Expiration';
 import Mutex from '../Mutex';
 import { ensureOffscreen } from '../Offscreen';
-import { SingletonPage, PageHost } from './SingletonPage';
 
 class BadgeObserver
 {
@@ -239,65 +238,6 @@ class HistoryObserver
   }
 }
 
-async function getPrimaryDisplaySize() {
-  const displays = await chrome.system.display.getInfo();
-  const primary = displays.find(d => d.isPrimary) || displays[0];
-  const { width, height } = primary.bounds;
-  return { width, height };
-}
-
-function getExtensionUrl(path) {
-  return chrome.runtime.getURL(path);
-}
-
-class CountdownObserver {
-  constructor(settings) {
-    this.settings = settings;
-  }
-
-  async onStart({ phase }) {
-    const settings = this.settings[{
-      [Phase.Focus]: 'focus',
-      [Phase.ShortBreak]: 'shortBreak',
-      [Phase.LongBreak]: 'longBreak'
-    }[phase]] || {};
-
-    const { host, resolution } = settings.countdown || {};
-    if (!host) return;
-
-    let page = null;
-    const url = getExtensionUrl('modules/countdown.html');
-
-    if (host === 'tab') {
-      page = await SingletonPage.show(url, PageHost.Tab);
-      page.focus();
-      return;
-    }
-
-    if (host !== 'window') {
-      return;
-    }
-
-    let properties = {};
-
-    if (resolution === 'fullscreen') {
-      properties = { state: 'maximized' };
-    } else if (Array.isArray(resolution)) {
-      const [windowWidth, windowHeight] = resolution;
-
-      const { width: screenWidth, height: screenHeight } = await getPrimaryDisplaySize();
-
-      const left = screenWidth / 2 - windowWidth / 2;
-      const top = screenHeight / 2 - windowHeight / 2;
-
-      properties = { width: windowWidth, height: windowHeight, left, top };
-    }
-
-    page = await SingletonPage.show(url, PageHost.Window, properties);
-    await page.focus();
-  }
-}
-
 class MenuObserver
 {
   constructor(menu) {
@@ -358,7 +298,6 @@ export {
   ExpirationSoundObserver,
   NotificationObserver,
   HistoryObserver,
-  CountdownObserver,
   MenuObserver,
   TraceObserver
 };

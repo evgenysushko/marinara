@@ -113,26 +113,6 @@
     "message": "Descanso largo",
     "description": "Long Break section header. Shown on the settings page."
   },
-  "autostart_title": {
-    "message": "Inicio automático",
-    "description": "Autostart section header. Shown on the settings page."
-  },
-  "autostart_description": {
-    "message": "Programar un Pomodoro para que comience automáticamente a la hora especificada.",
-    "description": "Autostart setting description. Shown on the settings page."
-  },
-  "autostart_notification_title": {
-    "message": "Inicio automático Pomodoro",
-    "description": "Autostart notification title. Shown in browser notifications when the autostart Pomodoro starts."
-  },
-  "autostart_notification_message": {
-    "message": "Este Pomodoro programado se inició automáticamente.",
-    "description": "Autostart notification message. Shown in browser notifications when the autostart Pomodoro starts."
-  },
-  "time": {
-    "message": "Tiempo:",
-    "description": "Time input label. Shown on the settings page."
-  },
   "duration": {
     "message": "Duración:",
     "description": "Timer duration label. Shown on the settings page."

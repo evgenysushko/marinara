@@ -113,18 +113,6 @@
     "message": "Lang Pause",
     "description": "Long Break section header. Shown on the settings page."
   },
-  "autostart_title": {
-    "message": "Autostart",
-    "description": "Autostart section header. Shown on the settings page."
-  },
-  "autostart_description": {
-    "message": "Sæt dagens første Pomodoro til automatisk at begynde på det angivne tidspunkt.",
-    "description": "Autostart setting description. Shown on the settings page."
-  },
-  "time": {
-    "message": "Tidspunkt:",
-    "description": "Time input label. Shown on the settings page."
-  },
   "duration": {
     "message": "Varighed:",
     "description": "Timer duration label. Shown on the settings page."
@@ -355,7 +343,7 @@
     "message": "%-H:%M:%S",
     "description": "Time-only format. See format options at https://github.com/d3/d3-time-format/blob/master/README.md#locale_format."
   },
-    "time_period_am": {
+  "time_period_am": {
     "message": "",
     "description": "12-hour clock AM specifier. Can be empty if 24-hour clock is used. See format options at https://github.com/d3/d3-time-format/blob/master/README.md#locale_format."
   },

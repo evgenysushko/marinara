@@ -113,26 +113,6 @@
     "message": "Lång paus",
     "description": "Long Break section header. Shown on the settings page."
   },
-  "autostart_title": {
-    "message": "Autostart",
-    "description": "Autostart section header. Shown on the settings page."
-  },
-  "autostart_description": {
-    "message": "Schemalägg en Pomodoro vid angiven tid.",
-    "description": "Autostart setting description. Shown on the settings page."
-  },
-  "autostart_notification_title": {
-    "message": "Pomodoro autostartad",
-    "description": "Autostart notification title. Shown in browser notifications when the autostart Pomodoro starts."
-  },
-  "autostart_notification_message": {
-    "message": "Den schemalagda Pomodoron startades automatiskt",
-    "description": "Autostart notification message. Shown in browser notifications when the autostart Pomodoro starts."
-  },
-  "time": {
-    "message": "Tid:",
-    "description": "Time input label. Shown on the settings page."
-  },
   "duration": {
     "message": "Längd:",
     "description": "Timer duration label. Shown on the settings page."

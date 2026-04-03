@@ -70,8 +70,6 @@
   "modules/background.js",
   "modules/chunk-common.js",
   "modules/chunk-vendors.js",
-  "modules/countdown.html",
-  "modules/countdown.js",
   "modules/expire.html",
   "modules/expire.js",
   "modules/options.html",

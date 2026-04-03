@@ -5,9 +5,8 @@ import { History } from './History';
 import StorageManager from './StorageManager';
 import { SettingsSchema, PersistentSettings } from './Settings';
 import { HistoryService, SoundsService, SettingsService, PomodoroService, OptionsService } from './Services';
-import { BadgeObserver, TimerSoundObserver, ExpirationSoundObserver, NotificationObserver, HistoryObserver, CountdownObserver, MenuObserver } from './Observers';
+import { BadgeObserver, TimerSoundObserver, ExpirationSoundObserver, NotificationObserver, HistoryObserver, MenuObserver } from './Observers';
 import { ServiceBroker } from '../Service';
-import * as Alarms from './Alarms';
 import { PersistenceObserver, loadState, restoreTimer, ALARM_NAME } from './TimerPersistence';
 
 // MV3: Register event listeners synchronously before any async work.
@@ -57,19 +56,13 @@ async function run() {
   timer.observe(new NotificationObserver(timer, settings, history));
   timer.observe(new ExpirationSoundObserver(settings));
   timer.observe(new TimerSoundObserver(settings));
-  timer.observe(new CountdownObserver(settings));
   timer.observe(new MenuObserver(menu));
 
   menu.apply();
   settingsManager.on('change', () => menu.apply());
 
-  // Must await — Alarms.onAlarm() references module-level `settings` variable
-  // that is set inside install() via `settings = await settingsManager.get()`.
-  await Alarms.install(settingsManager);
-
-  // Wire up alarm handler (consolidates autostart + timer-expire).
+  // Wire up alarm handler for timer-expire.
   alarmHandler = (alarm) => {
-    Alarms.onAlarm(alarm, timer);
     if (alarm.name === ALARM_NAME && timer.isRunning && timer.remaining <= 0) {
       timer.timer.setExpireTimeout(0);
     }

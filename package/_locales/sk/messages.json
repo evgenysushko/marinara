@@ -113,26 +113,6 @@
     "message": "Dlhá Pauza",
     "description": "Long Break section header. Shown on the settings page."
   },
-  "autostart_title": {
-    "message": "Autoštart",
-    "description": "Autostart section header. Shown on the settings page."
-  },
-  "autostart_description": {
-    "message": "Naplánuj si Pomodoro, aby sa automaticky spustilo v určený čas.",
-    "description": "Autostart setting description. Shown on the settings page."
-  },
-  "autostart_notification_title": {
-    "message": "Autoštart Pomodoro",
-    "description": "Autostart notification title. Shown in browser notifications when the autostart Pomodoro starts."
-  },
-  "autostart_notification_message": {
-    "message": "Toto naplánované Pomodoro sa automaticky spustilo",
-    "description": "Autostart notification message. Shown in browser notifications when the autostart Pomodoro starts."
-  },
-  "time": {
-    "message": "Čas:",
-    "description": "Time input label. Shown on the settings page."
-  },
   "duration": {
     "message": "Trvanie",
     "description": "Timer duration label. Shown on the settings page."
@@ -161,18 +141,6 @@
     "message": "Žiaden",
     "description": "The 'no sound' option. Represents nothing selected. Shown on the settings page."
   },
-  "countdown_timer": {
-    "message": "Časovač:",
-    "description": "Countdown timer label. Shown on the settings page."
-  },
-  "width": {
-    "message": "Šírka",
-    "description": "Width input placeholder. Refers to countdown window width in pixels."
-  },
-  "height": {
-    "message": "Výška",
-    "description": "Height input placeholder. Refers to countdown window height in pixels."
-  },
   "do_not_show": {
     "message": "Nezobrazovať",
     "description": "Countdown timer visibility option. Shown on the settings page."
@@ -184,22 +152,6 @@
   "show_in_window": {
     "message": "Zobraziť v pop-up okne",
     "description": "Countdown timer visibility option. Shown on the settings page."
-  },
-  "fullscreen": {
-    "message": "Celá obrazovka",
-    "description": "Countdown timer resolution option for a fullscreen (maximized) countdown timer. Shown on the settings page."
-  },
-  "custom": {
-    "message": "Vlastné",
-    "description": "Countdown timer resolution option. Lets the user specify their own countdown window resolution. Shown on the settings page."
-  },
-  "countdown_autoclose_tab": {
-    "message": "Zatvoriť kartu po ukončení relácie",
-    "description": "Countdown timer option. Specifies if the countdown tab should close when the session ends. Shown on the settings page."
-  },
-  "countdown_autoclose_window": {
-    "message": "Zatvoriť okno po ukončení relácie",
-    "description": "Countdown timer option. Specifies if the countdown window should close when the session ends. Shown on the settings page."
   },
   "when_complete": {
     "message": "Po dokončení:",
@@ -870,10 +822,6 @@
   "expire_title": {
     "message": "Čas Vypršal",
     "description": "Expiration page title. Shown on the expiration page when a focus/break session completes."
-  },
-  "countdown": {
-    "message": "Odpočet",
-    "description": "Countdown page title. Shown on the countdown timer page."
   },
   "gong_1": {
     "message": "Gong 1",

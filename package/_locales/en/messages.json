@@ -12,7 +12,7 @@
     "description": "The short description of the application. Shown in the web store."
   },
   "chrome_web_store_description": {
-    "message": "• Short & long breaks\n• Toolbar icon with countdown timer\n• Track Pomodoro history & stats\n• Configurable long break intervals\n• Configurable timer durations\n• Desktop & tab notifications\n• Audio notifications with over 20 sounds\n• Ticking timer sounds\n• Scheduled automatic timers\n• Open source software",
+    "message": "• Short & long breaks\n• Toolbar icon with countdown timer\n• Track Pomodoro history & stats\n• Configurable long break intervals\n• Configurable timer durations\n• Desktop & tab notifications\n• Audio notifications with over 20 sounds\n• Ticking timer sounds\n• Open source software",
     "description": "Detailed extension description shown to users in the Chrome Web Store."
   },
   "pomodoro_assistant": {
@@ -113,26 +113,6 @@
     "message": "Long Break",
     "description": "Long Break section header. Shown on the settings page."
   },
-  "autostart_title": {
-    "message": "Autostart",
-    "description": "Autostart section header. Shown on the settings page."
-  },
-  "autostart_description": {
-    "message": "Schedule a Pomodoro to automatically start at the specified time.",
-    "description": "Autostart setting description. Shown on the settings page."
-  },
-  "autostart_notification_title": {
-    "message": "Autostart Pomodoro",
-    "description": "Autostart notification title. Shown in browser notifications when the autostart Pomodoro starts."
-  },
-  "autostart_notification_message": {
-    "message": "This scheduled Pomodoro was automatically started",
-    "description": "Autostart notification message. Shown in browser notifications when the autostart Pomodoro starts."
-  },
-  "time": {
-    "message": "Time:",
-    "description": "Time input label. Shown on the settings page."
-  },
   "duration": {
     "message": "Duration:",
     "description": "Timer duration label. Shown on the settings page."
@@ -161,18 +141,6 @@
     "message": "None",
     "description": "The 'no sound' option. Represents nothing selected. Shown on the settings page."
   },
-  "countdown_timer": {
-    "message": "Countdown timer:",
-    "description": "Countdown timer label. Shown on the settings page."
-  },
-  "width": {
-    "message": "Width",
-    "description": "Width input placeholder. Refers to countdown window width in pixels."
-  },
-  "height": {
-    "message": "Height",
-    "description": "Height input placeholder. Refers to countdown window height in pixels."
-  },
   "do_not_show": {
     "message": "Do not show",
     "description": "Countdown timer visibility option. Shown on the settings page."
@@ -184,22 +152,6 @@
   "show_in_window": {
     "message": "Show in a popup window",
     "description": "Countdown timer visibility option. Shown on the settings page."
-  },
-  "fullscreen": {
-    "message": "Fullscreen",
-    "description": "Countdown timer resolution option for a fullscreen (maximized) countdown timer. Shown on the settings page."
-  },
-  "custom": {
-    "message": "Custom",
-    "description": "Countdown timer resolution option. Lets the user specify their own countdown window resolution. Shown on the settings page."
-  },
-  "countdown_autoclose_tab": {
-    "message": "Close tab when session ends",
-    "description": "Countdown timer option. Specifies if the countdown tab should close when the session ends. Shown on the settings page."
-  },
-  "countdown_autoclose_window": {
-    "message": "Close window when session ends",
-    "description": "Countdown timer option. Specifies if the countdown window should close when the session ends. Shown on the settings page."
   },
   "when_complete": {
     "message": "When complete:",
@@ -878,10 +830,6 @@
   "expire_title": {
     "message": "Time's Up",
     "description": "Expiration page title. Shown on the expiration page when a focus/break session completes."
-  },
-  "countdown": {
-    "message": "Countdown",
-    "description": "Countdown page title. Shown on the countdown timer page."
   },
   "gong_1": {
     "message": "Gong 1",

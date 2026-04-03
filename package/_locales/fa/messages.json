@@ -113,26 +113,6 @@
     "message": "استراحت بلند",
     "description": "Long Break section header. Shown on the settings page."
   },
-  "autostart_title": {
-    "message": "شروع خودکار",
-    "description": "Autostart section header. Shown on the settings page."
-  },
-  "autostart_description": {
-    "message": "یک پومودورو را برای اجرا در زمانی مشخص زمان‌بندی کنید.",
-    "description": "Autostart setting description. Shown on the settings page."
-  },
-  "autostart_notification_title": {
-    "message": "آغاز خودکار پومودورو",
-    "description": "Autostart notification title. Shown in browser notifications when the autostart Pomodoro starts."
-  },
-  "autostart_notification_message": {
-    "message": "این پومودوروی زمان‌بندی شده به طور خودکار اجرا شد.",
-    "description": "Autostart notification message. Shown in browser notifications when the autostart Pomodoro starts."
-  },
-  "time": {
-    "message": "زمان:",
-    "description": "Time input label. Shown on the settings page."
-  },
   "duration": {
     "message": "مدت‌زمان:",
     "description": "Timer duration label. Shown on the settings page."
@@ -161,10 +141,6 @@
     "message": "هیچ",
     "description": "The 'no sound' option. Represents nothing selected. Shown on the settings page."
   },
-  "countdown_timer": {
-    "message": "تایمر شمارش معکوس:",
-    "description": "Countdown timer label. Shown on the settings page."
-  },
   "do_not_show": {
     "message": "نمایش نده",
     "description": "Countdown timer visibility option. Shown on the settings page."
@@ -176,22 +152,6 @@
   "show_in_window": {
     "message": "نمایش در پنجره‌ی پاپ‌آپ",
     "description": "Countdown timer visibility option. Shown on the settings page."
-  },
-  "fullscreen": {
-    "message": "تمام‌صفحه",
-    "description": "Countdown timer resolution option for a fullscreen (maximized) countdown timer. Shown on the settings page."
-  },
-  "custom": {
-    "message": "سفارشی",
-    "description": "Countdown timer resolution option. Lets the user specify their own countdown window resolution. Shown on the settings page."
-  },
-  "countdown_autoclose_tab": {
-    "message": "بستن زبانه پس از پایان جلسه",
-    "description": "Countdown timer option. Specifies if the countdown tab should close when the session ends. Shown on the settings page."
-  },
-  "countdown_autoclose_window": {
-    "message": "بستن پنجره پس از پایان جلسه",
-    "description": "Countdown timer option. Specifies if the countdown window should close when the session ends. Shown on the settings page."
   },
   "when_complete": {
     "message": "بعد از اتمام:",
@@ -870,10 +830,6 @@
   "expire_title": {
     "message": "وقت تمام شده!",
     "description": "Expiration page title. Shown on the expiration page when a focus/break session completes."
-  },
-  "countdown": {
-    "message": "شمارش معکوس",
-    "description": "Countdown page title. Shown on the countdown timer page."
   },
   "gong_1": {
     "message": "سینی ۱",

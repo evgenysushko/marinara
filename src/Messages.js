@@ -36,18 +36,6 @@ class Messages
   get august_short() {
     return chrome.i18n.getMessage('august_short', []);
   }
-  get autostart_description() {
-    return chrome.i18n.getMessage('autostart_description', []);
-  }
-  get autostart_notification_message() {
-    return chrome.i18n.getMessage('autostart_notification_message', []);
-  }
-  get autostart_notification_title() {
-    return chrome.i18n.getMessage('autostart_notification_title', []);
-  }
-  get autostart_title() {
-    return chrome.i18n.getMessage('autostart_title', []);
-  }
   average_stat(average) {
     return chrome.i18n.getMessage('average_stat', [average]);
   }
@@ -92,21 +80,6 @@ class Messages
   }
   get contributors() {
     return chrome.i18n.getMessage('contributors', []);
-  }
-  get countdown() {
-    return chrome.i18n.getMessage('countdown', []);
-  }
-  get countdown_autoclose_tab() {
-    return chrome.i18n.getMessage('countdown_autoclose_tab', []);
-  }
-  get countdown_autoclose_window() {
-    return chrome.i18n.getMessage('countdown_autoclose_window', []);
-  }
-  get countdown_timer() {
-    return chrome.i18n.getMessage('countdown_timer', []);
-  }
-  get custom() {
-    return chrome.i18n.getMessage('custom', []);
   }
   get daily_distribution() {
     return chrome.i18n.getMessage('daily_distribution', []);
@@ -240,9 +213,6 @@ class Messages
   get friday_short() {
     return chrome.i18n.getMessage('friday_short', []);
   }
-  get fullscreen() {
-    return chrome.i18n.getMessage('fullscreen', []);
-  }
   get glass_ping() {
     return chrome.i18n.getMessage('glass_ping', []);
   }
@@ -263,9 +233,6 @@ class Messages
   }
   heatmap_tooltip(pomodoros, date) {
     return chrome.i18n.getMessage('heatmap_tooltip', [pomodoros, date]);
-  }
-  get height() {
-    return chrome.i18n.getMessage('height', []);
   }
   get help_translate() {
     return chrome.i18n.getMessage('help_translate', []);
@@ -600,9 +567,6 @@ class Messages
   get thursday_short() {
     return chrome.i18n.getMessage('thursday_short', []);
   }
-  get time() {
-    return chrome.i18n.getMessage('time', []);
-  }
   get time_format() {
     return chrome.i18n.getMessage('time_format', []);
   }
@@ -674,9 +638,6 @@ class Messages
   }
   get white_noise() {
     return chrome.i18n.getMessage('white_noise', []);
-  }
-  get width() {
-    return chrome.i18n.getMessage('width', []);
   }
   get wind_up_clock() {
     return chrome.i18n.getMessage('wind_up_clock', []);

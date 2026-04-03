@@ -113,26 +113,6 @@
     "message": "长时间休息",
     "description": "Long Break section header. Shown on the settings page."
   },
-  "autostart_title": {
-    "message": "自动开始",
-    "description": "Autostart section header. Shown on the settings page."
-  },
-  "autostart_description": {
-    "message": "制定一个番茄工作计划并在特定的时间开始",
-    "description": "Autostart setting description. Shown on the settings page."
-  },
-  "autostart_notification_title": {
-    "message": "自动开始番茄工作计划",
-    "description": "Autostart notification title. Shown in browser notifications when the autostart Pomodoro starts."
-  },
-  "autostart_notification_message": {
-    "message": "已制定的番茄工作计划已经自动开始",
-    "description": "Autostart notification message. Shown in browser notifications when the autostart Pomodoro starts."
-  },
-  "time": {
-    "message": "时间：",
-    "description": "Time input label. Shown on the settings page."
-  },
   "duration": {
     "message": "持续时间：",
     "description": "Timer duration label. Shown on the settings page."
@@ -161,10 +141,6 @@
     "message": "无",
     "description": "The 'no sound' option. Represents nothing selected. Shown on the settings page."
   },
-  "countdown_timer": {
-    "message": "定时器：",
-    "description": "Countdown timer label. Shown on the settings page."
-  },
   "do_not_show": {
     "message": "不再显示",
     "description": "Countdown timer visibility option. Shown on the settings page."
@@ -176,22 +152,6 @@
   "show_in_window": {
     "message": "在弹出窗口中显示",
     "description": "Countdown timer visibility option. Shown on the settings page."
-  },
-  "fullscreen": {
-    "message": "全屏",
-    "description": "Countdown timer resolution option for a fullscreen (maximized) countdown timer. Shown on the settings page."
-  },
-  "custom": {
-    "message": "自定义",
-    "description": "Countdown timer resolution option. Lets the user specify their own countdown window resolution. Shown on the settings page."
-  },
-  "countdown_autoclose_tab": {
-    "message": "当会话结束后关闭选项卡",
-    "description": "Countdown timer option. Specifies if the countdown tab should close when the session ends. Shown on the settings page."
-  },
-  "countdown_autoclose_window": {
-    "message": "当会话结束后关闭窗口",
-    "description": "Countdown timer option. Specifies if the countdown window should close when the session ends. Shown on the settings page."
   },
   "when_complete": {
     "message": "完成时：",
@@ -870,10 +830,6 @@
   "expire_title": {
     "message": "时间到",
     "description": "Expiration page title. Shown on the expiration page when a focus/break session completes."
-  },
-  "countdown": {
-    "message": "倒计时",
-    "description": "Countdown page title. Shown on the countdown timer page."
   },
   "gong_1": {
     "message": "锣 1",

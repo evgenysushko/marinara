@@ -163,16 +163,6 @@
         </div>
       </fieldset>
     </div>
-    <div class="section autostart">
-      <h2>{{ M.autostart_title }}</h2>
-      <p>{{ M.autostart_description }}</p>
-      <p class="field">
-        <label>
-          <span>{{ M.time }}</span>
-          <input type="time" v-model="settings.autostart.time" class="time" id="autostart-time">
-        </label>
-      </p>
-    </div>
     <transition name="slide-up">
       <div v-if="showSettingsSaved" @click="dismissSettingsSaved" class="save">
         <p>
@@ -197,8 +187,6 @@ input[type="number"] {
 }
 .slide-up-enter, .slide-up-leave-to {
   transform: translateY(300%);
-}
-.section.autostart {
 }
 .save {
   position: fixed;
@@ -246,7 +234,7 @@ input[type="number"] {
 import { SettingsClient, SoundsClient } from '../background/Services';
 import Mutex from '../Mutex';
 import SoundSelect from './SoundSelect';
-import CountdownSettings from './CountdownSettings';
+
 import M from '../Messages';
 import createTimerSound from '../TimerSound';
 import { focus } from '../Directives';
@@ -374,7 +362,6 @@ export default {
     focus
   },
   components: {
-    CountdownSettings,
     SoundSelect
   }
 };

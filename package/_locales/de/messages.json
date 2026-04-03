@@ -113,18 +113,6 @@
     "message": "Lange Pause",
     "description": "Long Break section header. Shown on the settings page."
   },
-  "autostart_title": {
-    "message": "Autostart",
-    "description": "Autostart section header. Shown on the settings page."
-  },
-  "autostart_description": {
-    "message": "Start des ersten Pomodoro des Tages für eine bestimmte Uhrzeit planen.",
-    "description": "Autostart setting description. Shown on the settings page."
-  },
-  "time": {
-    "message": "Zeit:",
-    "description": "Time input label. Shown on the settings page."
-  },
   "duration": {
     "message": "Dauer:",
     "description": "Timer duration label. Shown on the settings page."
@@ -153,14 +141,6 @@
     "message": "Keiner",
     "description": "The 'no sound' option. Represents nothing selected. Shown on the settings page."
   },
-  "width": {
-    "message": "Breite",
-    "description": "Width input placeholder. Refers to countdown window width in pixels."
-  },
-  "height": {
-    "message": "Höhe",
-    "description": "Height input placeholder. Refers to countdown window height in pixels."
-  },
   "do_not_show": {
     "message": "Nicht zeigen",
     "description": "Countdown timer visibility option. Shown on the settings page."
@@ -172,22 +152,6 @@
   "show_in_window": {
     "message": "In einem Popup-Fenster anzeigen",
     "description": "Countdown timer visibility option. Shown on the settings page."
-  },
-  "fullscreen": {
-    "message": "Vollbild",
-    "description": "Countdown timer resolution option for a fullscreen (maximized) countdown timer. Shown on the settings page."
-  },
-  "custom": {
-    "message": "Custom",
-    "description": "Countdown timer resolution option. Lets the user specify their own countdown window resolution. Shown on the settings page."
-  },
-  "countdown_autoclose_tab": {
-    "message": "Tab schließen, wenn die Sessions endet",
-    "description": "Countdown timer option. Specifies if the countdown tab should close when the session ends. Shown on the settings page."
-  },
-  "countdown_autoclose_window": {
-    "message": "Fenster schließen, wenn die Sessions endet",
-    "description": "Countdown timer option. Specifies if the countdown window should close when the session ends. Shown on the settings page."
   },
   "when_complete": {
     "message": "Wann Timer zu Ende ist:",

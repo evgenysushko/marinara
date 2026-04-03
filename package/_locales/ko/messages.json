@@ -113,26 +113,6 @@
     "message": "긴 휴식",
     "description": "Long Break section header. Shown on the settings page."
   },
-  "autostart_title": {
-    "message": "자동시작",
-    "description": "Autostart section header. Shown on the settings page."
-  },
-  "autostart_description": {
-    "message": "정해진 시간에 포모도로 자동 시작 설정하기",
-    "description": "Autostart setting description. Shown on the settings page."
-  },
-  "autostart_notification_title": {
-    "message": "포모도로 자동 시작",
-    "description": "Autostart notification title. Shown in browser notifications when the autostart Pomodoro starts."
-  },
-  "autostart_notification_message": {
-    "message": "예정된 포모도로가 자동 시작 되었습니다",
-    "description": "Autostart notification message. Shown in browser notifications when the autostart Pomodoro starts."
-  },
-  "time": {
-    "message": "시간:",
-    "description": "Time input label. Shown on the settings page."
-  },
   "duration": {
     "message": "지속 시간:",
     "description": "Timer duration label. Shown on the settings page."
@@ -161,18 +141,6 @@
     "message": "선택안함",
     "description": "The 'no sound' option. Represents nothing selected. Shown on the settings page."
   },
-  "countdown_timer": {
-    "message": "카운트다운 타이머:",
-    "description": "Countdown timer label. Shown on the settings page."
-  },
-  "width": {
-    "message": "넓이",
-    "description": "Width input placeholder. Refers to countdown window width in pixels."
-  },
-  "height": {
-    "message": "높이",
-    "description": "Height input placeholder. Refers to countdown window height in pixels."
-  },
   "do_not_show": {
     "message": "숨기기",
     "description": "Countdown timer visibility option. Shown on the settings page."
@@ -184,22 +152,6 @@
   "show_in_window": {
     "message": "새로운 창에서 보기",
     "description": "Countdown timer visibility option. Shown on the settings page."
-  },
-  "fullscreen": {
-    "message": "전체화면",
-    "description": "Countdown timer resolution option for a fullscreen (maximized) countdown timer. Shown on the settings page."
-  },
-  "custom": {
-    "message": "사용자 값",
-    "description": "Countdown timer resolution option. Lets the user specify their own countdown window resolution. Shown on the settings page."
-  },
-  "countdown_autoclose_tab": {
-    "message": "세션이 끝나면 탭 닫기",
-    "description": "Countdown timer option. Specifies if the countdown tab should close when the session ends. Shown on the settings page."
-  },
-  "countdown_autoclose_window": {
-    "message": "세션이 끝나면 창 닫기",
-    "description": "Countdown timer option. Specifies if the countdown window should close when the session ends. Shown on the settings page."
   },
   "when_complete": {
     "message": "끝나면:",
@@ -736,10 +688,6 @@
   "expire_title": {
     "message": "시간이 다되었습니다",
     "description": "Expiration page title. Shown on the expiration page when a focus/break session completes."
-  },
-  "countdown": {
-    "message": "카운트다운",
-    "description": "Countdown page title. Shown on the countdown timer page."
   },
   "gong_1": {
     "message": "Gong 1",

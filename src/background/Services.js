@@ -27,16 +27,11 @@ class SettingsService extends Service
       return false;
     }
 
-    let autostart = settings.autostart && settings.autostart.time;
-    if (autostart && !autostart.match(/^\d+:\d+$/)) {
-      return false;
-    }
-
     return true;
   }
 
   _isPhaseValid(phase) {
-    let { duration, timerSound, countdown } = phase;
+    let { duration, timerSound } = phase;
     if (isNaN(duration) || duration <= 0 || duration > 999) {
       return false;
     }
@@ -44,16 +39,6 @@ class SettingsService extends Service
     if (timerSound && timerSound.metronome) {
       let { bpm } = timerSound.metronome;
       if (isNaN(bpm) || bpm <= 0 || bpm > 1000) {
-        return false;
-      }
-    }
-
-    if (countdown.host === 'window') {
-      let { resolution } = countdown;
-
-      // Resolution must either be 'fullscreen' or a [width, height] array.
-      let isValid = (resolution === 'fullscreen') || (Array.isArray(resolution) && resolution.length === 2 && resolution.every(Number.isInteger));
-      if (!isValid) {
         return false;
       }
     }

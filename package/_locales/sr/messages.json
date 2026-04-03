@@ -113,26 +113,6 @@
     "message": "Duga Pauza",
     "description": "Long Break section header. Shown on the settings page."
   },
-  "autostart_title": {
-    "message": "Automatsko Pokretanje",
-    "description": "Autostart section header. Shown on the settings page."
-  },
-  "autostart_description": {
-    "message": "Zakaži automatsko pokretanje Pomodora u određeno vreme.",
-    "description": "Autostart setting description. Shown on the settings page."
-  },
-  "autostart_notification_title": {
-    "message": "Automatski Pokreni Pomodoro",
-    "description": "Autostart notification title. Shown in browser notifications when the autostart Pomodoro starts."
-  },
-  "autostart_notification_message": {
-    "message": "Zakazani Pomodoro je automatski pokrenut",
-    "description": "Autostart notification message. Shown in browser notifications when the autostart Pomodoro starts."
-  },
-  "time": {
-    "message": "Vreme:",
-    "description": "Time input label. Shown on the settings page."
-  },
   "duration": {
     "message": "Trajanje:",
     "description": "Timer duration label. Shown on the settings page."

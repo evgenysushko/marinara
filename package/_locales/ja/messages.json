@@ -113,26 +113,6 @@
     "message": "長い休憩",
     "description": "Long Break section header. Shown on the settings page."
   },
-  "autostart_title": {
-    "message": "自動スタート",
-    "description": "Autostart section header. Shown on the settings page."
-  },
-  "autostart_description": {
-    "message": "特定の時間にPomodoroが自動的に開始するようスケジュール設定します。",
-    "description": "Autostart setting description. Shown on the settings page."
-  },
-  "autostart_notification_title": {
-    "message": "Pomodoroの自動スタート",
-    "description": "Autostart notification title. Shown in browser notifications when the autostart Pomodoro starts."
-  },
-  "autostart_notification_message": {
-    "message": "このスケジュールされたPomodoroは自動的にスタートします",
-    "description": "Autostart notification message. Shown in browser notifications when the autostart Pomodoro starts."
-  },
-  "time": {
-    "message": "時間：",
-    "description": "Time input label. Shown on the settings page."
-  },
   "duration": {
     "message": "期間：",
     "description": "Timer duration label. Shown on the settings page."

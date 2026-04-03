@@ -28,11 +28,6 @@ class SettingsSchema
       focus: {
         duration: 25,
         timerSound: null,
-        countdown: {
-          host: null,
-          autoclose: true,
-          resolution: [500, 500]
-        },
         notifications: {
           desktop: true,
           tab: true,
@@ -42,11 +37,6 @@ class SettingsSchema
       shortBreak: {
         duration: 5,
         timerSound: null,
-        countdown: {
-          host: null,
-          autoclose: true,
-          resolution: [500, 500]
-        },
         notifications: {
           desktop: true,
           tab: true,
@@ -57,19 +47,11 @@ class SettingsSchema
         duration: 15,
         interval: 4,
         timerSound: null,
-        countdown: {
-          host: null,
-          autoclose: true,
-          resolution: [500, 500]
-        },
         notifications: {
           desktop: true,
           tab: true,
           sound: null
         }
-      },
-      autostart: {
-        time: null,
       },
       version: this.version
     };
@@ -159,11 +141,6 @@ class SettingsSchema
   from4To5(v4) {
     let v5 = clone(v4);
     v5.version = 5;
-
-    v5.autostart = {
-      time: null
-    };
-
     return v5;
   }
 
@@ -183,25 +160,6 @@ class SettingsSchema
   from6To7(v6) {
     let v7 = clone(v6);
     v7.version = 7;
-
-    v7.focus.countdown = {
-      host: null,
-      autoclose: true,
-      resolution: [500, 500]
-    };
-
-    v7.shortBreak.countdown = {
-      host: null,
-      autoclose: true,
-      resolution: [500, 500]
-    };
-
-    v7.longBreak.countdown = {
-      host: null,
-      autoclose: true,
-      resolution: [500, 500]
-    };
-
     return v7;
   }
 }

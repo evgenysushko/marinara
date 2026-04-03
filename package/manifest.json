@@ -15,7 +15,6 @@
     "notifications",
     "tabs",
     "windows",
-    "system.display",
     "offscreen"
   ],
   "action": {

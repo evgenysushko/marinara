@@ -113,26 +113,6 @@
     "message": "พักระยะยาว",
     "description": "Long Break section header. Shown on the settings page."
   },
-  "autostart_title": {
-    "message": "ทำงานอัตโนมัติ",
-    "description": "Autostart section header. Shown on the settings page."
-  },
-  "autostart_description": {
-    "message": "ตั้งเวลาให้ Pomodoro เริ่มทำงานเองโดยอัตโนมัติตามเวลาที่ตั้งไว้",
-    "description": "Autostart setting description. Shown on the settings page."
-  },
-  "autostart_notification_title": {
-    "message": "เริ่ม Pomodoro โดยอัตโนติ",
-    "description": "Autostart notification title. Shown in browser notifications when the autostart Pomodoro starts."
-  },
-  "autostart_notification_message": {
-    "message": "Pomodoro ที่ถูกตั้งเวลาไว้นี้ถูกเริ่มโดยอัตโนมัติ",
-    "description": "Autostart notification message. Shown in browser notifications when the autostart Pomodoro starts."
-  },
-  "time": {
-    "message": "เวลา:",
-    "description": "Time input label. Shown on the settings page."
-  },
   "duration": {
     "message": "ช่วงเวลา:",
     "description": "Timer duration label. Shown on the settings page."
@@ -161,18 +141,6 @@
     "message": "ไม่มี",
     "description": "The 'no sound' option. Represents nothing selected. Shown on the settings page."
   },
-  "countdown_timer": {
-    "message": "ตัวนับถอยหลัง:",
-    "description": "Countdown timer label. Shown on the settings page."
-  },
-  "width": {
-    "message": "ความกว้าง",
-    "description": "Width input placeholder. Refers to countdown window width in pixels."
-  },
-  "height": {
-    "message": "ความสูง",
-    "description": "Height input placeholder. Refers to countdown window height in pixels."
-  },
   "do_not_show": {
     "message": "ไม่แสดง",
     "description": "Countdown timer visibility option. Shown on the settings page."
@@ -184,22 +152,6 @@
   "show_in_window": {
     "message": "แสดงในหน้าต่าง popup",
     "description": "Countdown timer visibility option. Shown on the settings page."
-  },
-  "fullscreen": {
-    "message": "แสดงเต็มจอ",
-    "description": "Countdown timer resolution option for a fullscreen (maximized) countdown timer. Shown on the settings page."
-  },
-  "custom": {
-    "message": "กำหนดเอง",
-    "description": "Countdown timer resolution option. Lets the user specify their own countdown window resolution. Shown on the settings page."
-  },
-  "countdown_autoclose_tab": {
-    "message": "ปิดแท็บเมื่อหมดเซสชั่น",
-    "description": "Countdown timer option. Specifies if the countdown tab should close when the session ends. Shown on the settings page."
-  },
-  "countdown_autoclose_window": {
-    "message": "ปิดหน้าต่างเมื่อหมดเซสชั่น",
-    "description": "Countdown timer option. Specifies if the countdown window should close when the session ends. Shown on the settings page."
   },
   "when_complete": {
     "message": "เมื่อเสร็จสิ้น:",
@@ -878,10 +830,6 @@
   "expire_title": {
     "message": "หมดเวลา",
     "description": "Expiration page title. Shown on the expiration page when a focus/break session completes."
-  },
-  "countdown": {
-    "message": "นับถอยหลัง",
-    "description": "Countdown page title. Shown on the countdown timer page."
   },
   "gong_1": {
     "message": "ฆ้อง 1",

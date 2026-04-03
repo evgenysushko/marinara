@@ -113,26 +113,6 @@
     "message": "Pitkä tauko",
     "description": "Long Break section header. Shown on the settings page."
   },
-  "autostart_title": {
-    "message": "Automaattikäynnistys",
-    "description": "Autostart section header. Shown on the settings page."
-  },
-  "autostart_description": {
-    "message": "Ajasta Pomodoro alkamaan automaattisesti ennalta määrättynä aikana",
-    "description": "Autostart setting description. Shown on the settings page."
-  },
-  "autostart_notification_title": {
-    "message": "Käynnistä Pomodoro automaattisesti",
-    "description": "Autostart notification title. Shown in browser notifications when the autostart Pomodoro starts."
-  },
-  "autostart_notification_message": {
-    "message": "Tämä ajastettu Pomodoro käynnistettiin automaattisesti",
-    "description": "Autostart notification message. Shown in browser notifications when the autostart Pomodoro starts."
-  },
-  "time": {
-    "message": "Aika:",
-    "description": "Time input label. Shown on the settings page."
-  },
   "duration": {
     "message": "Kesto:",
     "description": "Timer duration label. Shown on the settings page."
@@ -161,18 +141,6 @@
     "message": "Ei ääntä",
     "description": "The 'no sound' option. Represents nothing selected. Shown on the settings page."
   },
-  "countdown_timer": {
-    "message": "Ajastin:",
-    "description": "Countdown timer label. Shown on the settings page."
-  },
-  "width": {
-    "message": "Leveys",
-    "description": "Width input placeholder. Refers to countdown window width in pixels."
-  },
-  "height": {
-    "message": "Korkeus",
-    "description": "Height input placeholder. Refers to countdown window height in pixels."
-  },
   "do_not_show": {
     "message": "Älä näytä",
     "description": "Countdown timer visibility option. Shown on the settings page."
@@ -184,22 +152,6 @@
   "show_in_window": {
     "message": "Näytä popup-ikkunassa",
     "description": "Countdown timer visibility option. Shown on the settings page."
-  },
-  "fullscreen": {
-    "message": "Koko näyttö",
-    "description": "Countdown timer resolution option for a fullscreen (maximized) countdown timer. Shown on the settings page."
-  },
-  "custom": {
-    "message": "Mukautettu",
-    "description": "Countdown timer resolution option. Lets the user specify their own countdown window resolution. Shown on the settings page."
-  },
-  "countdown_autoclose_tab": {
-    "message": "Sulje välilehti kun istunto päättyy",
-    "description": "Countdown timer option. Specifies if the countdown tab should close when the session ends. Shown on the settings page."
-  },
-  "countdown_autoclose_window": {
-    "message": "Sulje ikkuna kun istunto päättyy",
-    "description": "Countdown timer option. Specifies if the countdown window should close when the session ends. Shown on the settings page."
   },
   "when_complete": {
     "message": "Kun ajastin päättyy",
@@ -870,10 +822,6 @@
   "expire_title": {
     "message": "Valmis",
     "description": "Expiration page title. Shown on the expiration page when a focus/break session completes."
-  },
-  "countdown": {
-    "message": "Aika",
-    "description": "Countdown page title. Shown on the countdown timer page."
   },
   "gong_1": {
     "message": "Gongi 1",
