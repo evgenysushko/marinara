@@ -26,7 +26,7 @@ class Notification
       message: this.message,
       iconUrl: '/images/128.png',
       isClickable: !!this.action,
-      requireInteraction: true,
+      requireInteraction: false,
       buttons: this.buttons.map(b => {
         return {
           title: b.title,
