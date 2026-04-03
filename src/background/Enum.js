@@ -37,17 +37,6 @@ class Enum
     Object.freeze(this);
   }
 
-  keys() {
-    return Object.keys(this);
-  }
-
-  contains(option) {
-    if (!(option instanceof EnumOption)) {
-      return false;
-    }
-
-    return this[Symbol.keyFor(option.symbol)] === symbol;
-  }
 }
 
 export default Enum;

@@ -99,9 +99,6 @@ export default {
     }
   },
   watch: {
-    bucketSize() {
-      this.updateGraph();
-    },
     pomodoros() {
       this.updateGraph();
     }

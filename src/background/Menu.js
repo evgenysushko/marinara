@@ -27,10 +27,6 @@ class Menu
     this.groups = groups;
   }
 
-  addGroup(group) {
-    this.groups.push(group);
-  }
-
   apply() {
     let gen = ++menuGeneration;
     chrome.contextMenus.removeAll(() => {
@@ -102,19 +98,12 @@ class MenuGroup
     this.items = items;
   }
 
-  addItem(item) {
-    this.items.push(item);
-  }
 }
 
 class ParentMenu
 {
   constructor(...children) {
     this.children = children;
-  }
-
-  addChild(child) {
-    this.children.push(child);
   }
 
   get title() {

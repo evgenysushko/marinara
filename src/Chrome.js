@@ -31,9 +31,6 @@ class Chrome
     return Alarms;
   }
 
-  static get runtime() {
-    return Runtime;
-  }
 }
 
 function promise(fn) {
@@ -90,12 +87,6 @@ class Tabs
     return createInWindow(newWindow.id);
   }
 
-  static async getCurrent() {
-    return promise(callback => {
-      chrome.tabs.getCurrent(callback);
-    });
-  }
-
   static async update(tabId, updateProperties) {
     return promise(callback => {
       chrome.tabs.update(tabId, updateProperties, callback);
@@ -111,12 +102,6 @@ class Tabs
 
 class Windows
 {
-  static async getAll(getInfo) {
-    return promise(callback => {
-      chrome.windows.getAll(getInfo, callback);
-    });
-  }
-
   static async getLastFocused(getInfo) {
     return promise(callback => {
       chrome.windows.getLastFocused(getInfo, callback);
@@ -198,12 +183,6 @@ class Storage
 
 class Files
 {
-  static async readFile(file) {
-    let url = chrome.runtime.getURL(file);
-    let response = await fetch(url);
-    return await response.text();
-  }
-
   static async readBinary(file) {
     let url = chrome.runtime.getURL(file);
     let response = await fetch(url);
@@ -223,20 +202,6 @@ class Alarms
     });
   }
 
-  static async clearAll() {
-    return promise(callback => {
-      chrome.alarms.clearAll(callback)
-    });
-  }
-}
-
-class Runtime
-{
-  static getPlatformInfo() {
-    return promise(callback => {
-      chrome.runtime.getPlatformInfo(callback)
-    });
-  }
 }
 
 export default Chrome;

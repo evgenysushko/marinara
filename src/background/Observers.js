@@ -265,39 +265,11 @@ class MenuObserver
   }
 }
 
-class TraceObserver
-{
-  onStart(...args) {
-    console.log('start', ...args);
-  }
-
-  onStop(...args) {
-    console.log('stop', ...args);
-  }
-
-  onPause(...args) {
-    console.log('pause', ...args);
-  }
-
-  onResume(...args) {
-    console.log('resume', ...args);
-  }
-
-  onTick(...args) {
-    console.log('tick', ...args);
-  }
-
-  onExpire(...args) {
-    console.log('expire', ...args);
-  }
-}
-
 export {
   BadgeObserver,
   TimerSoundObserver,
   ExpirationSoundObserver,
   NotificationObserver,
   HistoryObserver,
-  MenuObserver,
-  TraceObserver
+  MenuObserver
 };

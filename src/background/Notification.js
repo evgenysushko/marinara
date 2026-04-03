@@ -1,5 +1,4 @@
 import Chrome from '../Chrome';
-import Mutex from '../Mutex';
 
 class Notification
 {
@@ -25,7 +24,6 @@ class Notification
       title: this.title,
       message: this.message,
       iconUrl: '/images/128.png',
-      isClickable: !!this.action,
       requireInteraction: false,
       buttons: this.buttons.map(b => {
         return {

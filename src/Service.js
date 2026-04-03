@@ -153,7 +153,6 @@ class ServiceProxy extends EventEmitter
 class Service
 {
   constructor() {
-    this.clients = {};
     this.serviceName = this.constructor.name;
   }
 

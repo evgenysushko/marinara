@@ -148,17 +148,10 @@ class OptionsService extends Service
     page.focus();
   }
 
-  async showSettingsPage() {
-    return await this.showPage('settings');
-  }
-
   async showHistoryPage() {
     return await this.showPage('history');
   }
 
-  async showFeedbackPage() {
-    return await this.showPage('feedback');
-  }
 }
 
 const SettingsClient = SettingsService.proxy;

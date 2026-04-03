@@ -129,11 +129,6 @@ class Timer extends EventEmitter
     this.emit('resume', this.status);
   }
 
-  restart() {
-    this.stop();
-    this.start();
-  }
-
   setExpireTimeout(seconds) {
     this.expireTimeout = setTimeout(() => {
       clearInterval(this.tickInterval);
@@ -263,11 +258,6 @@ class PomodoroTimer extends EventEmitter
       nextPhase: this.nextPhase,
       ...this.timer.status
     };
-  }
-
-  dispose() {
-    this.timer.stop();
-    this.timer.removeAllListeners();
   }
 
   startCycle() {
