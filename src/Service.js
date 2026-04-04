@@ -4,6 +4,7 @@ class ServiceBroker
 {
   constructor() {
     this.services = {};
+    this.pendingMessages = [];
     chrome.runtime.onMessage.addListener(this.onMessage.bind(this));
   }
 
@@ -20,6 +21,10 @@ class ServiceBroker
 
   static async invoke(call) {
     return await this.instance.invoke(call);
+  }
+
+  static replayPendingMessages() {
+    return this.instance.replayPendingMessages();
   }
 
   register(service) {
@@ -77,13 +82,22 @@ class ServiceBroker
   onMessage({ serviceName, methodName, args }, sender, respond) {
     let service = this.services[serviceName];
     if (!service || methodName === undefined) {
-      // Service is not defined in this context, so we have nothing to do.
+      if (serviceName && methodName !== undefined) {
+        // Service not yet registered; queue for replay after setup.
+        this.pendingMessages.push({ serviceName, methodName, args, respond });
+        return true;
+      }
       return;
     }
 
+    this._invoke(service, methodName, args, respond);
+    return true;
+  }
+
+  _invoke(service, methodName, args, respond) {
     if (!service[methodName]) {
-      respond({ error: `Invalid service request: ${serviceName}.${methodName}.` });
-      return true;
+      respond({ error: `Invalid service request: ${service.serviceName}.${methodName}.` });
+      return;
     }
 
     (async () => {
@@ -94,8 +108,18 @@ class ServiceBroker
         respond({ error: `${e}` });
       }
     })();
+  }
 
-    return true;
+  replayPendingMessages() {
+    const messages = this.pendingMessages.splice(0);
+    for (const { serviceName, methodName, args, respond } of messages) {
+      let service = this.services[serviceName];
+      if (!service) {
+        respond({ error: `Service not available: ${serviceName}.${methodName}` });
+        continue;
+      }
+      this._invoke(service, methodName, args, respond);
+    }
   }
 }
 

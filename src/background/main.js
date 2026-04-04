@@ -27,9 +27,17 @@ chrome.alarms.onAlarm.addListener(alarm => {
 });
 
 let clickHandler = null;
+let earlyClick = false;
 chrome.action.onClicked.addListener(() => {
-  if (clickHandler) clickHandler();
+  if (clickHandler) {
+    clickHandler();
+  } else {
+    earlyClick = true;
+  }
 });
+
+// Register ServiceBroker's onMessage listener synchronously.
+ServiceBroker.instance;
 
 async function run() {
   let settingsManager = new StorageManager(new SettingsSchema(), Chrome.storage.sync);
@@ -100,6 +108,12 @@ async function run() {
     }
     timer.advanceTimer = true;
     timer.emit('expire', timer.status);
+  }
+
+  // Replay any events that arrived during async setup.
+  ServiceBroker.replayPendingMessages();
+  if (earlyClick) {
+    clickHandler();
   }
 }
 
