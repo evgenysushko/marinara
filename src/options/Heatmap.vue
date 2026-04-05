@@ -114,7 +114,7 @@ function createHeatmap(data, start, el) {
     .data([1, 3, 5].map(d => shortDays[d]))
     .enter()
     .append('text')
-      .attr('transform', (d, i) => `translate(-7,${cellSize * 2 * (i + 1)})`)
+      .attr('transform', (d, i) => `translate(-7,${cellSize * (2 * i + 1)})`)
       .style('text-anchor', 'end')
       .attr('class', 'label')
       .text(d => d);
@@ -127,7 +127,7 @@ function createHeatmap(data, start, el) {
     .data([1, 3, 5].map(d => shortDays[d]))
     .enter()
     .append('text')
-      .attr('transform', (d, i) => `translate(${numColumns * cellSize + 7},${cellSize * 2 * (i + 1)})`)
+      .attr('transform', (d, i) => `translate(${numColumns * cellSize + 7},${cellSize * (2 * i + 1)})`)
       .style('text-anchor', 'start')
       .attr('class', 'label')
       .text(d => d);

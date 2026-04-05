@@ -263,9 +263,9 @@ export default {
       let now = new Date();
       let start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-      // Start at the first Sunday at least 39 weeks (~9 months) ago.
+      // Start at the first Monday at least 39 weeks (~9 months) ago.
       start.setDate(start.getDate() - 273);
-      start.setDate(start.getDate() - start.getDay());
+      start.setDate(start.getDate() - ((start.getDay() + 6) % 7));
       this.stats = await this.historyClient.getStats(+start);
       this.historyStart = start;
     }

@@ -33,7 +33,7 @@ function createWeekDistribution(el, data) {
     .attr('height', height)
     .attr('class', 'distribution');
 
-  let x = d3.scaleBand().domain(d3.range(0, 7)).rangeRound([0, width - pad]).padding(0.5);
+  let x = d3.scaleBand().domain([1, 2, 3, 4, 5, 6, 0]).rangeRound([0, width - pad]).padding(0.5);
   let y = d3.scaleLinear().domain([0, max]).range([height - 30, 0]);
 
   let xAxis = d3.axisBottom(x)

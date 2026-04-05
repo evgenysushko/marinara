@@ -194,7 +194,7 @@ class History
 
   static get thisWeek() {
     let week = new Date();
-    week.setDate(week.getDate() - week.getDay());
+    week.setDate(week.getDate() - ((week.getDay() + 6) % 7));
     week.setHours(0);
     week.setMinutes(0);
     week.setSeconds(0);
