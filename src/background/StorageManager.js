@@ -9,7 +9,8 @@ class StorageManager extends EventEmitter
   }
 
   async get() {
-    let [payload, modified] = this._upgrade(await this.storage.get());
+    let keys = Object.keys(this.schema.default);
+    let [payload, modified] = this._upgrade(await this.storage.get(keys));
     if (modified) {
       await this.storage.set(payload);
     }
