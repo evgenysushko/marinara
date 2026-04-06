@@ -107,7 +107,7 @@ async function play(filename) {
     chrome.runtime.sendMessage({ type: 'offscreen-play-audio', file: filename }, response => {
       const error = chrome.runtime.lastError;
       if (error) {
-        reject(error);
+        reject(new Error(error.message));
         return;
       }
 
