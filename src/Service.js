@@ -79,46 +79,43 @@ class ServiceBroker
     });
   }
 
-  onMessage({ serviceName, methodName, args }, sender, respond) {
+  onMessage({ serviceName, methodName, args }, sender) {
     let service = this.services[serviceName];
     if (!service || methodName === undefined) {
       if (serviceName && methodName !== undefined) {
         // Service not yet registered; queue for replay after setup.
-        this.pendingMessages.push({ serviceName, methodName, args, respond });
-        return true;
+        return new Promise(resolve => {
+          this.pendingMessages.push({ serviceName, methodName, args, resolve });
+        });
       }
       return;
     }
 
-    this._invoke(service, methodName, args, respond);
-    return true;
+    return this._invoke(service, methodName, args);
   }
 
-  _invoke(service, methodName, args, respond) {
+  async _invoke(service, methodName, args) {
     if (!service[methodName]) {
-      respond({ error: `Invalid service request: ${service.serviceName}.${methodName}.` });
-      return;
+      return { error: `Invalid service request: ${service.serviceName}.${methodName}.` };
     }
 
-    (async () => {
-      try {
-        respond({ result: await service[methodName](...args) });
-      } catch (e) {
-        console.error(e);
-        respond({ error: `${e}` });
-      }
-    })();
+    try {
+      return { result: await service[methodName](...args) };
+    } catch (e) {
+      console.error(e);
+      return { error: `${e}` };
+    }
   }
 
   replayPendingMessages() {
     const messages = this.pendingMessages.splice(0);
-    for (const { serviceName, methodName, args, respond } of messages) {
+    for (const { serviceName, methodName, args, resolve } of messages) {
       let service = this.services[serviceName];
       if (!service) {
-        respond({ error: `Service not available: ${serviceName}.${methodName}` });
+        resolve({ error: `Service not available: ${serviceName}.${methodName}` });
         continue;
       }
-      this._invoke(service, methodName, args, respond);
+      this._invoke(service, methodName, args).then(resolve);
     }
   }
 }

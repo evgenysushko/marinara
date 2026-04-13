@@ -72,28 +72,26 @@ async function handleTimerSound(message) {
 
 // --- Message listener ---
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((message, sender) => {
   if (!message || !message.type) {
     return;
   }
 
   if (message.type === 'offscreen-play-audio') {
-    playAudio(message.file).then(() => {
-      sendResponse({ ok: true });
-    }).catch(error => {
-      console.error(error);
-      sendResponse({ error: String(error) });
-    });
-    return true;
+    return playAudio(message.file)
+      .then(() => ({ ok: true }))
+      .catch(error => {
+        console.error(error);
+        return { error: String(error) };
+      });
   }
 
   if (message.type === 'timer-sound') {
-    handleTimerSound(message).then(() => {
-      sendResponse({ ok: true });
-    }).catch(error => {
-      console.error('Timer sound error:', error);
-      sendResponse({ error: String(error) });
-    });
-    return true;
+    return handleTimerSound(message)
+      .then(() => ({ ok: true }))
+      .catch(error => {
+        console.error('Timer sound error:', error);
+        return { error: String(error) };
+      });
   }
 });
