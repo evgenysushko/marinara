@@ -162,7 +162,7 @@ class ServiceProxy extends EventEmitter
     };
   }
 
-  _onMessage({ serviceName, eventName, args }, sender, respond) {
+  _onMessage({ serviceName, eventName, args }, sender) {
     if (serviceName !== this.serviceName || eventName === undefined) {
       return;
     }
