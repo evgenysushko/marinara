@@ -3,13 +3,9 @@ import { SingletonPage, PageHost } from './SingletonPage';
 
 const menuHandlers = new Map();
 let menuGeneration = 0;
+let earlyMenuClicks = [];
 
-chrome.contextMenus.onClicked.addListener((info, tab) => {
-  let handler = menuHandlers.get(info.menuItemId);
-  if (!handler) {
-    return;
-  }
-
+function runHandler(handler, info, tab) {
   try {
     let result = handler(info, tab);
     if (result && typeof result.then === 'function') {
@@ -17,6 +13,15 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     }
   } catch (e) {
     console.error(e);
+  }
+}
+
+chrome.contextMenus.onClicked.addListener((info, tab) => {
+  let handler = menuHandlers.get(info.menuItemId);
+  if (handler) {
+    runHandler(handler, info, tab);
+  } else {
+    earlyMenuClicks.push({ info, tab });
   }
 });
 
@@ -33,8 +38,7 @@ class Menu
       if (gen !== menuGeneration) return;
       menuHandlers.clear();
 
-      let idCounter = 0;
-      const nextId = prefix => `marinara-${prefix}-${Math.random().toString(16).slice(2)}-${idCounter++}`;
+      let separatorCount = 0;
 
       let firstGroup = true;
       for (let group of this.groups) {
@@ -46,7 +50,7 @@ class Menu
 
           if (firstItem && !firstGroup) {
             chrome.contextMenus.create({
-              id: nextId('separator'),
+              id: `separator-${separatorCount++}`,
               type: 'separator',
               contexts: this.contexts
             });
@@ -56,9 +60,8 @@ class Menu
           firstItem = false;
 
           if (item instanceof ParentMenu) {
-            let id = nextId('parent');
             chrome.contextMenus.create({
-              id,
+              id: item.id,
               title: item.title,
               contexts: this.contexts
             });
@@ -68,24 +71,32 @@ class Menu
                 continue;
               }
 
-              let childId = nextId('child');
               chrome.contextMenus.create({
-                id: childId,
+                id: child.id,
                 title: child.title,
                 contexts: this.contexts,
-                parentId: id
+                parentId: item.id
               });
-              menuHandlers.set(childId, () => child.run());
+              menuHandlers.set(child.id, () => child.run());
             }
           } else {
-            let itemId = nextId('item');
             chrome.contextMenus.create({
-              id: itemId,
+              id: item.id,
               title: item.title,
               contexts: this.contexts
             });
-            menuHandlers.set(itemId, () => item.run());
+            menuHandlers.set(item.id, () => item.run());
           }
+        }
+      }
+
+      // Replay context menu clicks that arrived before handlers were ready (cold-start).
+      let pending = earlyMenuClicks;
+      earlyMenuClicks = [];
+      for (let { info, tab } of pending) {
+        let handler = menuHandlers.get(info.menuItemId);
+        if (handler) {
+          runHandler(handler, info, tab);
         }
       }
     });
@@ -121,6 +132,10 @@ class RestartTimerParentMenu extends ParentMenu
     super(...children);
   }
 
+  get id() {
+    return 'restart-timer';
+  }
+
   get title() {
     return M.restart_timer;
   }
@@ -151,6 +166,10 @@ class StartFocusingAction extends Action
     this.timer = timer;
   }
 
+  get id() {
+    return 'start-focusing';
+  }
+
   get title() {
     return M.start_focusing;
   }
@@ -169,6 +188,10 @@ class StartShortBreakAction extends Action
   constructor(timer) {
     super();
     this.timer = timer;
+  }
+
+  get id() {
+    return 'start-short-break';
   }
 
   get title() {
@@ -191,6 +214,10 @@ class StartLongBreakAction extends Action
     this.timer = timer;
   }
 
+  get id() {
+    return 'start-long-break';
+  }
+
   get title() {
     return M.start_long_break;
   }
@@ -209,6 +236,10 @@ class StopTimerAction extends Action
   constructor(timer) {
     super();
     this.timer = timer;
+  }
+
+  get id() {
+    return 'stop-timer';
   }
 
   get title() {
@@ -231,6 +262,10 @@ class PauseTimerAction extends Action
     this.timer = timer;
   }
 
+  get id() {
+    return 'pause-timer';
+  }
+
   get title() {
     return M.pause_timer;
   }
@@ -251,6 +286,10 @@ class ResumeTimerAction extends Action
     this.timer = timer;
   }
 
+  get id() {
+    return 'resume-timer';
+  }
+
   get title() {
     return M.resume_timer;
   }
@@ -266,6 +305,10 @@ class ResumeTimerAction extends Action
 
 class PomodoroHistoryAction extends Action
 {
+  get id() {
+    return 'pomodoro-history';
+  }
+
   get title() {
     return M.pomodoro_history;
   }
@@ -287,6 +330,10 @@ class StartPomodoroCycleAction extends Action
   constructor(timer) {
     super();
     this.timer = timer;
+  }
+
+  get id() {
+    return 'start-pomodoro-cycle';
   }
 
   get title() {
