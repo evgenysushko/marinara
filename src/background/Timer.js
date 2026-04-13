@@ -130,6 +130,7 @@ class Timer extends EventEmitter
   }
 
   setExpireTimeout(seconds) {
+    clearTimeout(this.expireTimeout);
     this.expireTimeout = setTimeout(() => {
       clearInterval(this.tickInterval);
       clearTimeout(this.expireTimeout);
